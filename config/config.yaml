@@ -1,0 +1,5 @@
+data:
+  raw_path: "C:/Users/DELL/Documents/VEMV/pycaret/work/Diamond_cut_prediction/data/raw/diamonds.csv"
+  processed_path: "C:/Users/DELL/Documents/VEMV/pycaret/work/Diamond_cut_prediction/data/processed/diamonds_processed.csv"
+model:
+  path: "C:/Users/DELL/Documents/VEMV/pycaret/work/Diamond_cut_prediction/models/model_cut_prediction.pkl"

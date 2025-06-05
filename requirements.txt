@@ -1,0 +1,10 @@
+pandas>=2.1.4
+numpy>=1.26.4
+scikit-learn>=1.4.2
+imbalanced-learn>=0.13.0
+lightgbm>=4.5.0
+tensorflow>=2.18.0
+matplotlib>=3.7.5
+seaborn>=0.13.2
+PyYAML>=6.0.2
+pickle4>=0.0.1
