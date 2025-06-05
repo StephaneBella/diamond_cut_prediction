@@ -12,7 +12,4 @@ venv/
 # Fichiers système
 .DS_Store
 
-# Données sensibles ou volumineuses
-data/processed
-models/
-outputs/
+
