@@ -6,15 +6,18 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.optimizers import Adam
 from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
+from src.Preprocessing import build_pipeline
 
-def initialize_models():
+pipeline = build_pipeline()
+
+def initialize_models(pipeline = pipeline):
     """Initialise les différents modèles"""
     models = {
-        'DecisionTree': DecisionTreeClassifier(random_state=2),
-        'Balanced Random Forest': BalancedRandomForestClassifier(
-            random_state=2, sampling_strategy='auto', replacement=False, bootstrap=True),
-        'LightGBM': LGBMClassifier(objective='multiclass', random_state=2, verbose=-1, is_unbalance=True),
-        'ANN': create_ann_model()
+        'DecisionTree': make_pipeline(pipeline, DecisionTreeClassifier(random_state=2)),
+        'Balanced Random Forest': make_pipeline(pipeline, BalancedRandomForestClassifier(
+            random_state=2, sampling_strategy='auto', replacement=False, bootstrap=True)),
+        'LightGBM': make_pipeline(pipeline, LGBMClassifier(objective='multiclass', random_state=2, verbose=-1, is_unbalance=True))
     }
     return models
 
