@@ -3,3 +3,4 @@ data:
   processed_path: "C:/Users/DELL/Documents/VEMV/pycaret/work/Projets_professionnels/Diamond_cut_prediction/data/processed/diamonds_processed.csv"
 model:
   path: "C:/Users/DELL/Documents/VEMV/pycaret/work/Projets_professionnels/Diamond_cut_prediction/models/model_cut_prediction.pkl"
+  encoder_path: "C:/Users/DELL/Documents/VEMV/pycaret/work/Projets_professionnels/Diamond_cut_prediction/models/target_encoder.pkl"
