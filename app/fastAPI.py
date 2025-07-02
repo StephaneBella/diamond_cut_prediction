@@ -56,7 +56,14 @@ def predict(features: DiamondFeatures):
     # Inverse transform
     decoded = encoder.inverse_transform(prediction)
 
-    return {"predicted_cut": decoded[0]}
+    probabilites = model.predict_proba(input_df)[0]
+
+    proba_dict = dict(zip(encoder.classes_, probabilites))
+
+    return {
+        "predicted_cut": decoded[0],
+        "probabilities": proba_dict
+        }
 
 @app.post("/predict_batch")
 def predict_batch(features_list: List[DiamondFeatures]):
@@ -80,6 +87,7 @@ def predict_batch(features_list: List[DiamondFeatures]):
 
     # Prédiction batch
     predictions = model.predict(input_df)
+
     decoded = encoder.inverse_transform(predictions)
 
     # Retourner la liste des predictions décodées

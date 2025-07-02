@@ -2,6 +2,7 @@ import numpy as np
 import pickle
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
 import requests
 import base64
 import os
@@ -175,6 +176,27 @@ def main():
                         result = response.json()
 
                         st.success(f"Ce diamant a été prédit de qualité : **{result['predicted_cut']}**")
+
+                        # affichage des probabilites
+                        proba_dict = result.get('probabilities', None)
+
+                        if proba_dict:
+                            classes = list(proba_dict.keys())
+                            probas = list(proba_dict.values())
+
+                            plt.style.use('dark_background')
+                            plt.rcParams.update({
+                                "figure.facecolor":  (0.12 , 0.12, 0.12, 1),
+                                "axes.facecolor": (0.12 , 0.12, 0.12, 1),
+                            })
+                            fig, ax = plt.subplots()
+                            ax.bar(classes, probas, color='skyblue') #,
+                            ax.set_ylim([0, 1])
+                            ax.set_ylabel('Probabilité')
+                            ax.set_title('Distribution des probabilités')
+                            plt.xticks(rotation=45)
+                            plt.tight_layout()
+                            st.pyplot(fig)
 
                     else:
 
