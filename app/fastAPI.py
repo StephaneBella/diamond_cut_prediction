@@ -4,6 +4,7 @@ import pickle
 import numpy as np
 import pandas as pd 
 import os
+from typing import List
 
 app = FastAPI()
 
@@ -51,11 +52,37 @@ def predict(features: DiamondFeatures):
 
     # Prédiction
     prediction = model.predict(input_df)
-
+    
     # Inverse transform
     decoded = encoder.inverse_transform(prediction)
 
     return {"predicted_cut": decoded[0]}
 
+@app.post("/predict_batch")
+def predict_batch(features_list: List[DiamondFeatures]):
+    
+    # Construire un DataFrame à partir de la liste d'objets DiamondFeatures
+    input_data = []
+
+    for features in features_list:
+        input_data.append({
+            "carat": features.carat,
+            "depth": features.depth,
+            "table": features.table,
+            "x": features.x,
+            "y": features.y,
+            "z": features.z,
+            "color": features.color,
+            "clarity": features.clarity
+        })
+    
+    input_df = pd.DataFrame(input_data)
+
+    # Prédiction batch
+    predictions = model.predict(input_df)
+    decoded = encoder.inverse_transform(predictions)
+
+    # Retourner la liste des predictions décodées
+    return {'predicted_cut': decoded.tolist()}
 
 

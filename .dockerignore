@@ -1,0 +1,7 @@
+notebooks/
+tests/
+outputs/
+scripts/
+*.pyc
+__pycache__/
+.env
